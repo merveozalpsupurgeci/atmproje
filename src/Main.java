@@ -1,17 +1,62 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        String userName, password;
+        Scanner input = new Scanner(System.in);
+        int right = 3;
+        int balance = 1500;
+        int select;
+        while (right > 0) {
+            System.out.print("Kullanıcı Adınız :");
+            userName = input.nextLine();
+            System.out.print("Parolanız : ");
+            password = input.nextLine();
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+            if (userName.equals("patika") && password.equals("dev123")) {
+                System.out.println("Merhaba, Kodluyoruz Bankasına Hoşgeldiniz!");
+                do {
+                    System.out.println("1-Para yatırma\n" +
+                            "2-Para Çekme\n" +
+                            "3-Bakiye Sorgula\n" +
+                            "4-Çıkış Yap");
+                    System.out.print("Lütfen yapmak istediğiniz işlemi seçiniz : ");
+                    select = input.nextInt();
+                    switch (select) {
+                        case 1: {
+                            System.out.print("Para miktarı : ");
+                            int price = input.nextInt();
+                            balance += price;
+                            break;
+                        }
+                        case 2: {
+                            System.out.print("Para miktarı : ");
+                            int price = input.nextInt();
+                            if (price > balance) {
+                                System.out.println("Bakiye yetersiz.");
+                            } else {
+                                balance -= price;
+                            }
+                            break;
+                        }
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
-    }
-}
+                        case 3:
+                            System.out.println("Bakiyeniz : " + balance);
+                            break;
+
+                    }
+                }
+                while (select != 4);
+                System.out.println("Tekrar görüşmek üzere.");
+                break;
+            } else {
+                right--;
+                System.out.println("Hatalı kullanıcı adı veya şifre. Tekrar deneyiniz.");
+                if (right == 0) {
+                    System.out.println("Hesabınız bloke olmuştur lütfen banka ile iletişime geçiniz.");
+                } else {
+                    System.out.println("Kalan Hakkınız : " + right);
+                }
+            }
+
+        }}}
